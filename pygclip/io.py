@@ -8,10 +8,28 @@
     :license: MIT, see LICENSE for more details.
 """
 
-import subprocess
+import logging
+from subprocess import Popen, PIPE
+from typing import List, Union
 
 
-def write_to_clipboard(output: str) -> None:
-    process = subprocess.Popen('pbcopy', env={'LANG': 'en_US.UTF-8'}, stdin=subprocess.PIPE)
-    process.communicate(output.encode('utf-8'))
+def run_shell_command(args: List[str], stdin: Union[bytes, str, None]=None) -> str:
+    logger = logging.getLogger(__name__)
+    logger.debug('Running command: {}'.format(args))
+    if stdin is None:
+        process = Popen(args, stdout=PIPE)
+        return process.communicate()[0].decode('utf-8')
+    else:
+        process = Popen(args, stdin=PIPE, stdout=PIPE)
+        return process.communicate(stdin.encode('utf-8'))[0].decode('utf-8')
+
+
+def _generate_hex(text: str) -> str:
+    return run_shell_command(['hexdump', '-ve', '1/1 "%.2x"'], text)
+
+
+def write_html_to_clipboard(html: str) -> None:
+    hex_text = _generate_hex(html)
+    run_shell_command(['osascript', '-e', u'set the clipboard to \xabdata HTML{}\xbb'.format(hex_text)])
+
 

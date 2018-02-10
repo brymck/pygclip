@@ -9,18 +9,47 @@
 """
 
 import argparse
+import logging
+import os.path
 import sys
+from typing import Union
+
+from pygclip.html import generate_html
+from pygclip.io import write_html_to_clipboard
+from pygclip.logging import setup_logging
 
 
-def main(argv=None):
+def _process_arguments(
+    lexer: Union[str, None],
+    style: Union[str, None],
+    path: Union[str, None],
+) -> None:
+    html = generate_html(lexer=lexer, style=style, path=path)
+    write_html_to_clipboard(html)
+
+
+def main(argv=None) -> None:
     if argv is None:
         argv = sys.argv[1:]
     parser = argparse.ArgumentParser(description='Run pygclip.')
+    parser.add_argument('-d', dest='debug', action='store_true', help='debug output')
     parser.add_argument('-l', metavar='<lexer>', dest='lexer', help='lexer name')
     parser.add_argument('-s', metavar='<style>', dest='style', help='style name')
-    parser.add_argument('file', nargs='?', help='input file path')
+    parser.add_argument('path', nargs='?', help='input file path')
     args = parser.parse_args(argv)
-    print(args)
+
+    setup_logging(args.debug)
+    logger = logging.getLogger(__name__)
+
+    if args.path is not None and not os.path.isfile(args.path):
+        logger.error('File does not exist: {}'.format(args.path))
+        sys.exit(1)
+
+    _process_arguments(
+        lexer=args.lexer,
+        style=args.style,
+        path=args.path,
+    )
 
 
 if __name__ == '__main__':
