@@ -3,7 +3,7 @@
 set -e
 set -x
 
-if [[ "${uname -s)" == 'Darwin' ]]; then
+if [[ "$(uname -s)" == 'Darwin' ]]; then
     sw_vers
     brew update || brew update
 
