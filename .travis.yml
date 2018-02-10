@@ -8,6 +8,10 @@ cache:
     - $HOME/.cache/pip
     - $HOME/ossl-1/
 
+branches:
+  only:
+    - master
+
 matrix:
   include:
     - language: generic
@@ -23,6 +27,5 @@ install:
 script:
   - ./.travis/run.sh
 
-branches:
-  only:
-    - master
+after_success:
+  - ./.travis/upload_coverage.sh
