@@ -10,6 +10,7 @@
 
 import logging
 import re
+import sys
 from typing import Dict, Union
 import xml.etree.ElementTree as ET
 
@@ -66,7 +67,12 @@ def generate_html(
 ) -> str:
     logger = logging.getLogger(__name__)
     opts_text = _create_options_text(style)
-    html = run_shell_command(['pygmentize', '-O', opts_text, '-l', lexer, '-f', 'html', path])
+    cmd = ['pygmentize', '-O', opts_text, '-l', lexer, '-f', 'html']
+    if path is None:
+        html = run_shell_command(cmd, stdin=sys.stdin.read())
+    else:
+        cmd.append(path)
+        html = run_shell_command(cmd)
 
     # Remove extraneous newlines at end of code block
     html = re.sub(r'\n+(?=</pre></div>$)', '', html)
