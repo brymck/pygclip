@@ -1,9 +1,9 @@
-.PHONY: all install-dev test coverage cov test-all tox docs audit release clean-pyc upload-docs ebook
+.PHONY: all install-dev test coverage cov test-all tox docs audit clean-pyc upload-docs
 
 all: test
 
 install-dev:
-	pip install -q -e .[dev]
+	pip install --quiet --editable .[dev]
 
 test: clean-pyc install-dev
 	pytest
@@ -21,13 +21,10 @@ test-all: install-dev
 tox: test-all
 
 docs: clean-pyc install-dev
-	$(MAKE) -C docs html
+	$(MAKE) --directory=docs html
 
 audit:
 	python setup.py audit
-
-release:
-	python scripts/make-release.py
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
