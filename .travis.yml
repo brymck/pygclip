@@ -1,26 +1,29 @@
 os: osx
 sudo: false
+
 language: python
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/ossl-1/
 
 matrix:
   include:
-    - python: 3.6
-      env: TOXENV=py
-
-before_install:
-  - brew update;
-    brew install python3
-    virtualenv -p python3 ~/py-env
-    . ~/py-env/bin/activate
+    - language: generic
+      os: osx
+      osx_image: xcode8.3
+      env: TOXENV=py35
+    - language: generic
+      os: osx
+      osx_image: xcode8.3
+      env: TOXENV=py36
 
 install:
-  - pip install tox
+  - ./.travis/install.sh
 
 script:
-  - tox
-
-cache:
-  - pip
+  - ./.travis/run.sh
 
 branches:
   only:
