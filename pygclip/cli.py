@@ -16,7 +16,9 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
     parser = argparse.ArgumentParser(description='Run pygclip.')
-    parser.add_argument('-s', dest='style', help='f')
+    parser.add_argument('-l', metavar='<lexer>', dest='lexer', help='lexer name')
+    parser.add_argument('-s', metavar='<style>', dest='style', help='style name')
+    parser.add_argument('file', nargs='?', help='input file path')
     args = parser.parse_args(argv)
     print(args)
 
