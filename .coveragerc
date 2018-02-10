@@ -1,11 +1,11 @@
 [run]
 branch = True
 source =
-    flask
+    pygclip
     tests
 
 [paths]
 source =
-    flask
+    pygclip
     .tox/*/lib/python*/site-packages/pygclip
     .tox/pypy/site-packages/pygclip
