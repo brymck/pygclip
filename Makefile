@@ -23,11 +23,14 @@ tox: test-all
 audit:
 	python setup.py audit
 
-upload: dist
-	python setup.py upload
+build: clean-dist
+	python setup.py check
+	python setup.py sdist
+	python setup.py bdist_wheel
 
-dist: clean-dist
-	python setup.py sdist bdist_wheel
+upload: clean-dist
+	python setup.py sdist upload
+	python setup.py bdist_wheel upload
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
@@ -35,4 +38,5 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 clean-dist:
+	rm -rf build/
 	rm -rf dist/
