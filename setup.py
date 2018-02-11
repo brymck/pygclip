@@ -1,6 +1,10 @@
 import io
 import re
+import sys
 from setuptools import setup
+
+if sys.version_info < (3, 5):
+    sys.exit('Sorry, Python < 3.5 is not supported.')
 
 with io.open('README.rst', 'rt', encoding='utf8') as f:
     readme = f.read()
