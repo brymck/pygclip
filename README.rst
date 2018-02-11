@@ -39,8 +39,6 @@ File
 Standard input
 ==============
 
-You can also supply content at the standard input
-
 .. code-block:: bash
 
     $ echo "foo
@@ -50,14 +48,6 @@ You can also supply content at the standard input
 Clipboard
 =========
 
-And lastly, you can get it from the clipboard.
-
 .. code-block:: bash
 
     $ pygclip -s monokai -l python -c
-
-*******
-Results
-*******
-
-For all of the above
