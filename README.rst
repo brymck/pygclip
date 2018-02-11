@@ -41,7 +41,7 @@ Standard input
 
 .. code-block:: bash
 
-    $ echo "foo
+    $ pygclip -s monokai -l python
     def foo():
         bar()
 
