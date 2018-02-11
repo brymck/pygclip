@@ -1,5 +1,6 @@
 include Makefile LICENSE tox.ini
 
+graft assets
 graft tests
 graft docs
 
