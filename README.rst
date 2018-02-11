@@ -8,7 +8,8 @@ pygclip
 :code:`pygmentize` to clipboard for macOS
 
 This utility package is designed to send code through :code:`pygmentize` and save it as rich HTML in your macOS
-clipboard. It can then be pasted easily anything accept styled HTML input like Evernote, OneNote, Gmail, etc.
+clipboard. It can then be pasted easily into anything that accepts styled HTML input, such as Evernote, OneNote, Gmail,
+etc.
 
 .. image:: assets/screenshot.png
 
@@ -16,7 +17,7 @@ clipboard. It can then be pasted easily anything accept styled HTML input like E
 Usage
 *****
 
-:code:`pygclip` offers a couple ways to receive code:
+:code:`pygclip` offers a couple ways to retrieve code for passing on to :code:`pygmentize`:
 
 - From a file
 - Via the standard input
