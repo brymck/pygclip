@@ -22,6 +22,12 @@ setup(
     install_requires=[
         'pygments',
     ],
+    setup_requires=[
+        'pytest-runner',
+    ],
+    tests_require=[
+        'pytest',
+    ],
     extras_require={
         'dev': [
             'coverage',
