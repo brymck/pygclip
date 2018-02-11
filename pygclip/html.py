@@ -62,14 +62,21 @@ def _modify_html(html: str) -> str:
 
 def generate_html(
     lexer: Union[str, None],
-    path: Union[str, None],
     style: Union[str, None],
+    path: Union[str, None],
+    clipboard: bool,
 ) -> str:
     logger = logging.getLogger(__name__)
     opts_text = _create_options_text(style)
     cmd = ['pygmentize', '-O', opts_text, '-l', lexer, '-f', 'html']
     if path is None:
-        html = run_shell_command(cmd, stdin=sys.stdin.read())
+        if clipboard:
+            text = run_shell_command(['pbpaste', '-Prefer', 'txt'])
+            if not text.strip():
+                raise ValueError('No plain-text content in clipboard.')
+            html = run_shell_command(cmd, stdin=text)
+        else:
+            html = run_shell_command(cmd, stdin=sys.stdin.read())
     else:
         cmd.append(path)
         html = run_shell_command(cmd)

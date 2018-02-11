@@ -23,8 +23,9 @@ def _process_arguments(
     lexer: Union[str, None],
     style: Union[str, None],
     path: Union[str, None],
+    clipboard: bool,
 ) -> None:
-    html = generate_html(lexer=lexer, style=style, path=path)
+    html = generate_html(lexer=lexer, style=style, path=path, clipboard=clipboard)
     write_html_to_clipboard(html)
 
 
@@ -32,9 +33,10 @@ def main(argv=None) -> None:
     if argv is None:
         argv = sys.argv[1:]
     parser = argparse.ArgumentParser(description='Run pygclip.')
-    parser.add_argument('-d', dest='debug', action='store_true', help='debug output')
-    parser.add_argument('-l', metavar='<lexer>', dest='lexer', help='lexer name')
-    parser.add_argument('-s', metavar='<style>', dest='style', help='style name')
+    parser.add_argument('-d', '--debug', dest='debug', action='store_true', help='debug output')
+    parser.add_argument('-l', '--lexer', metavar='<lexer>', dest='lexer', help='lexer name')
+    parser.add_argument('-s', '--style', metavar='<style>', dest='style', help='style name')
+    parser.add_argument('-c', '--clipboard', dest='clipboard', action='store_true', help='read from clipboard')
     parser.add_argument('path', nargs='?', help='input file path')
     args = parser.parse_args(argv)
 
@@ -49,6 +51,7 @@ def main(argv=None) -> None:
         lexer=args.lexer,
         style=args.style,
         path=args.path,
+        clipboard=args.clipboard,
     )
 
 

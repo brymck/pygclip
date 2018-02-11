@@ -24,12 +24,8 @@ def run_shell_command(args: List[str], stdin: Union[bytes, str, None]=None) -> s
         return process.communicate(stdin.encode('utf-8'))[0].decode('utf-8')
 
 
-def _generate_hex(text: str) -> str:
-    return run_shell_command(['hexdump', '-ve', '1/1 "%.2x"'], text)
-
-
 def write_html_to_clipboard(html: str) -> None:
-    hex_text = _generate_hex(html)
+    hex_text = html.encode('utf-8').hex()
     run_shell_command(['osascript', '-e', u'set the clipboard to \xabdata HTML{}\xbb'.format(hex_text)])
 
 
