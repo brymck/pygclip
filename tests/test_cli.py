@@ -45,7 +45,7 @@ def test_main_with_clipboard(clipboard, resource):
     assert file_result == clipboard_result
 
 
-def test_main_fails_with_blank_clipboard(clipboard, resource):
+def test_main_fails_with_blank_clipboard():
     """Test that the entry point will fail when reading from a blank clipboard."""
     Popen(['osascript', '-e', 'set the clipboard to ""']).communicate()
     sys.argv = ['pygclip', '-s', 'monokai', '-l', 'python', '-c']
