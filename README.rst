@@ -11,7 +11,7 @@ This utility package is designed to send code through :code:`pygmentize` and sav
 clipboard. It can then be pasted easily into anything that accepts styled HTML input, such as Evernote, OneNote, Gmail,
 etc.
 
-.. image:: https://github.com/brymck/pygclip/blob/master/assets/screenshot.png
+.. image:: https://github.com/brymck/pygclip/raw/master/assets/screenshot.png
 
 *****
 Usage
