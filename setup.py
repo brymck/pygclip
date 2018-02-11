@@ -44,7 +44,6 @@ setup(
         'dev': [
             'coverage',
             'pytest>=3',
-            'sphinx',
             'tox',
         ],
     },

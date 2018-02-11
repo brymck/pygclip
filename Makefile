@@ -1,4 +1,4 @@
-.PHONY: all install-dev test coverage cov test-all tox docs audit clean-pyc upload-docs
+.PHONY: all install-dev test coverage cov test-all tox audit clean-pyc
 
 all: test
 
@@ -19,9 +19,6 @@ test-all: install-dev
 	tox
 
 tox: test-all
-
-docs: clean-pyc install-dev
-	$(MAKE) --directory=docs html
 
 audit:
 	python setup.py audit
