@@ -68,7 +68,9 @@ def generate_html(
 ) -> str:
     logger = logging.getLogger(__name__)
     opts_text = _create_options_text(style)
-    cmd = ['pygmentize', '-O', opts_text, '-l', lexer, '-f', 'html']
+    cmd = ['pygmentize', '-O', opts_text, '-f', 'html']
+    if lexer:
+        cmd.extend(['-l', lexer])
     if path is None:
         if clipboard:
             text = run_shell_command(['pbpaste', '-Prefer', 'txt'])

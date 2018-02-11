@@ -41,11 +41,9 @@ def main(argv=None) -> None:
     args = parser.parse_args(argv)
 
     setup_logging(args.debug)
-    logger = logging.getLogger(__name__)
 
     if args.path is not None and not os.path.isfile(args.path):
-        logger.error('File does not exist: {}'.format(args.path))
-        sys.exit(1)
+        raise FileNotFoundError('File does not exist: {}'.format(args.path))
 
     _process_arguments(
         lexer=args.lexer,
