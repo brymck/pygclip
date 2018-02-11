@@ -1,4 +1,3 @@
-import logging
 from pygclip.logging import setup_logging
 
 
