@@ -21,13 +21,13 @@ test-all: install-dev
 tox: test-all
 
 audit:
-	python setup.py audi
+	python setup.py audit
 
 upload: dist
 	python setup.py upload
 
 dist: clean-dist
-	python setup.py dist bdist_wheel
+	python setup.py sdist bdist_wheel
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
