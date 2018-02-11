@@ -21,7 +21,7 @@ test-all: install-dev
 tox: test-all
 
 audit:
-	python setup.py audit
+	python setup.py audi
 
 upload: dist
 	python setup.py upload
@@ -34,5 +34,5 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
-clean-dist
+clean-dist:
 	rm -rf dist/
