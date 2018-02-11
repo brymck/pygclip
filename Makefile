@@ -1,4 +1,4 @@
-.PHONY: all install-dev test coverage cov test-all tox audit clean-pyc
+.PHONY: all install-dev test coverage cov test-all tox audit upload dist clean-pyc clean-dist
 
 all: test
 
@@ -23,7 +23,16 @@ tox: test-all
 audit:
 	python setup.py audit
 
+upload: dist
+	python setup.py upload
+
+dist: clean-dist
+	python setup.py dist bdist_wheel
+
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
+
+clean-dist
+	rm -rf dist/
