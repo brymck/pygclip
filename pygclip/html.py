@@ -12,7 +12,7 @@ import logging
 import re
 import sys
 from typing import Dict, Union
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ETree
 
 from pygclip.colors import darken_color
 from pygclip.io import run_shell_command
@@ -27,7 +27,7 @@ def _create_options_text(
     return ','.join(options)
 
 
-def _get_styles(node: ET.Element) -> Dict[str, str]:
+def _get_styles(node: ETree.Element) -> Dict[str, str]:
     style_text = node.attrib.get('style', '')
     styles = {}
     for pair in style_text.split(';'):
@@ -36,7 +36,7 @@ def _get_styles(node: ET.Element) -> Dict[str, str]:
     return styles
 
 
-def _override_styles(node: ET.Element, overrides: Dict[str, str]) -> None:
+def _override_styles(node: ETree.Element, overrides: Dict[str, str]) -> None:
     styles = _get_styles(node)
     styles.update(overrides)
     pairs = ['{}: {}'.format(k, v) for k, v in styles.items()]
@@ -45,7 +45,7 @@ def _override_styles(node: ET.Element, overrides: Dict[str, str]) -> None:
 
 
 def _modify_html(html: str) -> str:
-    root = ET.fromstring(html)
+    root = ETree.fromstring(html)
 
     # Format <pre> tag within enclosing <div>
     background = _get_styles(root).get('background')
@@ -57,7 +57,7 @@ def _modify_html(html: str) -> str:
         'padding': '1em',
     })
 
-    return ET.tostring(root, encoding='utf-8').decode('utf-8')
+    return ETree.tostring(root, encoding='utf-8').decode('utf-8')
 
 
 def generate_html(
