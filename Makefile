@@ -5,6 +5,9 @@ all: test
 install-dev:
 	pip install --quiet --editable .[dev]
 
+lint:
+	python setup.py lint
+
 test: clean-pyc install-dev
 	pytest
 

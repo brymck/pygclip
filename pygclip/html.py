@@ -46,16 +46,20 @@ def _override_styles(node: ETree.Element, overrides: Dict[str, str]) -> None:
 
 def _modify_html(html: str) -> str:
     root = ETree.fromstring(html)
+    pre = root.find('pre')
+    if pre is None:
+        raise ValueError("Can't find <pre> node in `pygmentize` output:\n{}".format(html))
 
-    # Format <pre> tag within enclosing <div>
-    background = _get_styles(root).get('background')
-    border_color = darken_color(background, 0.5)
-    _override_styles(root.find('pre'), {
-        'background': background,
-        'border': 'solid 1px {}'.format(border_color),
+    styles = {
         'font-family': 'monospace',
         'padding': '1em',
-    })
+    }
+    background = _get_styles(root).get('background')
+    if background is not None:
+        border_color = darken_color(background, 0.5)
+        styles['background'] = background
+        styles['border'] = 'solid 1px {}'.format(border_color)
+    _override_styles(pre, styles)
 
     return ETree.tostring(root, encoding='utf-8').decode('utf-8')
 
