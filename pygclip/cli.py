@@ -9,9 +9,9 @@
 """
 
 import argparse
-import logging
 import os.path
 import sys
+from textwrap import dedent
 from typing import Union
 
 from pygclip.html import generate_html
@@ -32,7 +32,9 @@ def _process_arguments(
 def main(argv=None) -> None:
     if argv is None:
         argv = sys.argv[1:]
-    parser = argparse.ArgumentParser(description='Run pygclip.')
+    parser = argparse.ArgumentParser(description=dedent('''\
+        Convert input code text into syntax-highlighted HTML in your clipboard.
+    '''))
     parser.add_argument('-d', '--debug', dest='debug', action='store_true', help='debug output')
     parser.add_argument('-l', '--lexer', metavar='<lexer>', dest='lexer', help='lexer name')
     parser.add_argument('-s', '--style', metavar='<style>', dest='style', help='style name')

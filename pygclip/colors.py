@@ -30,4 +30,3 @@ def _darken_rgb(rgb: RGB, factor: float) -> RGB:
 
 def darken_color(hex_color: str, factor: float) -> str:
     return _rgb_to_hex(_darken_rgb(_hex_to_rgb(hex_color), factor))
-

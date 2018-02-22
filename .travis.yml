@@ -8,10 +8,6 @@ cache:
     - $HOME/.cache/pip
     - $HOME/ossl-1/
 
-branches:
-  only:
-    - master
-
 matrix:
   include:
     - language: generic
