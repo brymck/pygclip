@@ -28,13 +28,11 @@ Examples below:
 File
 ====
 
-.. code-block:: python
-
-    def foo():
-        return 'bar'
-
 .. code-block:: bash
 
+    $ cat path/to/file.py
+    def foo():
+        return 'bar'
     $ pygclip -s monokai -l python path/to/file.py
 
 Standard input
@@ -51,4 +49,5 @@ Clipboard
 
 .. code-block:: bash
 
+    $ echo "def foo():\n    return 'bar'" | pbcopy
     $ pygclip -s monokai -l python -c

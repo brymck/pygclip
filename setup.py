@@ -43,6 +43,8 @@ setup(
     extras_require={
         'dev': [
             'coverage',
+            'flake8',
+            'flake8-mypy',
             'pytest>=3',
             'tox',
         ],

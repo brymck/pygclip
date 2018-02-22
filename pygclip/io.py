@@ -10,10 +10,10 @@
 
 import logging
 from subprocess import Popen, PIPE
-from typing import List, Union
+from typing import List, Optional
 
 
-def run_shell_command(args: List[str], stdin: Union[bytes, str, None]=None) -> str:
+def run_shell_command(args: List[str], stdin: Optional[str]=None) -> str:
     logger = logging.getLogger(__name__)
     logger.debug('Running command: {}'.format(args))
     if stdin is None:
@@ -27,5 +27,3 @@ def run_shell_command(args: List[str], stdin: Union[bytes, str, None]=None) -> s
 def write_html_to_clipboard(html: str) -> None:
     hex_text = html.encode('utf-8').hex()
     run_shell_command(['osascript', '-e', u'set the clipboard to \xabdata HTML{}\xbb'.format(hex_text)])
-
-
